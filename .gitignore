@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Data and Models (Keep structure, ignore big files) ---
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.mat
+*.csv
+
+# --- Machine Learning Models ---
+models/*
+!models/.gitkeep
+
+# --- Power BI Temporary Files ---
+*.pbit
+*.pbi
+*.pbix.user
