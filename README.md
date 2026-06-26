@@ -1,20 +1,43 @@
-# Predictive Maintenance of Industrial Bearings: A Machine Learning & Power BI Approach
+# Predictive Maintenance of Industrial Bearings
+### Machine Learning + Power BI · Python · Scikit-learn
 
-This repository hosts the source code and deployment architecture for an end-to-end intelligent diagnostic system tailored for industrial rotating machinery (asynchronous motors). The solution leverages multi-sensor data fusion to track bearing degradation in real time, minimize unexpected line shutdowns, and prevent catastrophic material failures.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Scikit-learn](https://img.shields.io/badge/Scikit--learn-Random%20Forest-orange)
+![Power BI](https://img.shields.io/badge/Dashboard-Power%20BI-yellow)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 
-## 🚀 Key Features
-- **Multi-Sensor Fusion & Innovation**: Integrates high-frequency vibration parameters (RMS and Kurtosis) with physics-modeled synthetic indicators (Temperature and Magnetic Flux) to increase diagnostic robustness and mitigate false alarms.
-- **Robust Machine Learning Model**: Employs a supervised Random Forest Classifier to categorize bearing health status across four operational modes: Normal, Inner Race Fault, Outer Race Fault, and Ball Fault.
-- **Dual-Layer Visualization**:
-  - A responsive **Web Interface (IHM)** for on-demand localized structural diagnosis.
-  - An interactive **Power BI Dashboard** connected via a streaming data pipeline for factory-wide real-time fleet supervision and predictive maintenance tracking.
+## Problem statement
+Industrial bearing failures cause costly unplanned downtime in manufacturing environments.
+Real-world fault data is scarce and expensive to collect — making standard supervised ML 
+pipelines difficult to apply directly.
 
-## 📁 Repository Structure
-Refer to the directory architecture to locate data pipelines (`src/data_processing.py`), model workflows (`src/train.py`), the diagnostic web application (`web_app/`), and the final Power BI template (`dashboard/`).
+## Approach
+To overcome the data scarcity problem, I engineered a **physical and mathematical simulation** 
+that injects realistic multi-dimensional fault signatures directly into the dataset:
 
-## 📊 Dataset Reference
-The vibration baseline relies on the internationally benchmarked **Case Western Reserve University (CWRU) Bearing Dataset** operating at a 12 kHz sampling rate, which was processed via a 50% overlapping sliding window mechanism.
+- **Temperature profiles** — normal operating range vs. fault-induced thermal deviation
+- **Magnetic flux profiles** — modelled electromagnetic signatures for inner race, outer race, 
+  and ball faults
+- **Fault distribution injection** — statistical distributions fitted to real failure modes
 
----
-**Author:** Yosr GABSI  
-**Academic Framework:** National Engineering School of Carthage (ENICarthage), 2025-2026.
+This produced a robust, multimodal training dataset without requiring expensive physical test rigs.
+
+## Model
+| Component | Detail |
+|-----------|--------|
+| Algorithm | Random Forest Classifier (Scikit-learn) |
+| Fault classes | Normal · Inner race · Outer race · Ball fault |
+| Features | Vibration amplitude, temperature delta, magnetic flux variance |
+| Validation | Cross-validation on simulated + benchmark data |
+
+## Dashboard
+A **live Power BI dashboard** was built for real-time monitoring:
+- Streaming data ingestion
+- Fault class probability indicators
+- Alert threshold visualisation
+
+> Screenshot of the Power BI dashboard:
+
+![Dashboard](images/dashboard_screenshot.png)
+
+## Repository structure
